@@ -12,6 +12,12 @@ class Application {
     return this.serviceManager.register(services, this);
   }
 
+  registerServices(services) {
+    for(let service of services) {
+      this.registerService(service);
+    }
+  }
+
   registerConnection(connName, connObj) {
     return this.connectionManager.register(connName, connObj);
   }

@@ -15,12 +15,6 @@ class ServiceManager {
     return this.services[serviceName] = serviceInstance;
   }
 
-  registerAll(serviceClasses, application) {
-    for(let serviceClass of serviceClasses) {
-      this.register(serviceClass, application);
-    }
-  }
-
   getService(serviceName) {
     if (!this.services.hasOwnProperty(serviceName)) {
       throw new Error("Service not configured");
