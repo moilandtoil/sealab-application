@@ -3,6 +3,7 @@
 const BaseService = require("../base_service.js");
 const ServiceManager = require("../service_manager.js");
 const ConnectionManager = require("../connection_manager.js");
+const ModelManager = require("../model_manager.js");
 const DefaultLogger = require("../default_logger.js");
 const Application = require("../application.js");
 
@@ -23,19 +24,37 @@ class OtherService extends BaseService {
   }
 }
 
-describe("An application", () => {
+describe("Check application constructor", () => {
 
-  let connectionManager = null;
-  let serviceManager = null;
+  test("without passing managers", () => {
+    let application = new Application({}, true);
+    expect(application.serviceManager.constructor.name).toEqual("ServiceManager");
+    expect(application.connectionManager.constructor.name).toEqual("ConnectionManager");
+    expect(application.modelManager.constructor.name).toEqual("ModelManager");
+  });
+
+  test("with passing managers", () => {
+    let connectionManager = new ConnectionManager();
+    let serviceManager = new ServiceManager();
+    let modelManager = new ModelManager();
+    let application = new Application({
+      serviceManager: serviceManager,
+      connectionManager: connectionManager,
+      modelManager: modelManager
+    }, true);
+    expect(application.serviceManager.constructor.name).toEqual("ServiceManager");
+    expect(application.connectionManager.constructor.name).toEqual("ConnectionManager");
+    expect(application.modelManager.constructor.name).toEqual("ModelManager");
+  });
+});
+
+describe("An application", () => {
   let application = null;
   beforeEach(() => {
-    connectionManager = new ConnectionManager();
-    serviceManager = new ServiceManager();
-    application = new Application(serviceManager, connectionManager, true);
+    application = new Application({}, true);
   });
 
   describe("with service manager", () => {
-
     test("can get registered service", () => {
       let service = application.registerService(TestService);
       expect(application.service(service.name())).toEqual(service);

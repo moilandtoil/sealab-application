@@ -1,10 +1,15 @@
 "use strict";
 
+const ServiceManager = require("./service_manager.js");
+const ConnectionManager = require("./connection_manager.js");
+const ModelManager = require("./model_manager.js");
+
 class Application {
 
-  constructor(serviceManager, connectionManager, logger) {
-    this.serviceManager = serviceManager;
-    this.connectionManager = connectionManager;
+  constructor(managers, logger) {
+    this.serviceManager = managers.serviceManager || new ServiceManager();
+    this.connectionManager = managers.connectionManager || new ConnectionManager();
+    this.modelManager = managers.modelManager || new ModelManager();
     this.appLogger = logger;
   }
 
@@ -22,12 +27,26 @@ class Application {
     return this.connectionManager.register(connName, connObj);
   }
 
-  service(serviceId) {
-    return this.serviceManager.getService(serviceId);
+  registerModel(modelName, modelClass) {
+    return this.modelManager.register(modelName, modelClass);
+  }
+
+  registerModels(models) {
+    for(let model of models) {
+      this.registerModels(model)
+    }
+  }
+
+  service(serviceName) {
+    return this.serviceManager.getService(serviceName);
   }
 
   conn(connId) {
     return this.connectionManager.getConnection(connId);
+  }
+
+  model(modelName) {
+    return this.modelManager.getModel(modelName);
   }
 
   logger() {

@@ -11,8 +11,8 @@ describe("Check that ConnectionManager", () => {
 
   describe("when registering a connection", () => {
     test("that hasn't been", () => {
-      let connection = connectionManager.register("foo", "bar");
-      expect(connection).toEqual("bar");
+      connectionManager.register("foo", "bar");
+      expect(connectionManager.getConnection("foo")).toEqual("bar");
     });
 
     test("that has already been", () => {
