@@ -30,5 +30,9 @@ describe("Check that ServiceManager", () => {
       }).toThrow();
     });
 
+    test("with implicit 'service'", () => {
+      let service = serviceManager.register(ValidService, {});
+      expect(serviceManager.getService("valid")).toEqual(service);
+    });
   });
 });

@@ -15,10 +15,13 @@ class ServiceManager {
   }
 
   getService(serviceName) {
-    if (!this.services.hasOwnProperty(serviceName)) {
-      throw new Error("Service not configured");
+    if (this.services.hasOwnProperty(`${serviceName}_service`)) {
+      return this.services[`${serviceName}_service`];
     }
-    return this.services[serviceName];
+    if (this.services.hasOwnProperty(serviceName)) {
+      return this.services[serviceName];
+    }
+    throw new Error("Service not configured");
   }
 }
 
