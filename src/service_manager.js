@@ -1,5 +1,7 @@
 "use strict";
 
+const ChangeCase = require("change-case");
+
 class ServiceManager {
   constructor() {
     this.services = {};
@@ -7,11 +9,8 @@ class ServiceManager {
 
   register(serviceClass, application) {
     const serviceInstance = new serviceClass(application);
-    const serviceName = serviceInstance.name();
+    const serviceName = ChangeCase.snakeCase(serviceInstance.constructor.name);
 
-    if (!/^[a-zA-Z_]+$/.test(serviceName)) {
-      throw new Error(`Invalid service name configured for ${serviceInstance.constructor.name}`);
-    }
     return this.services[serviceName] = serviceInstance;
   }
 
