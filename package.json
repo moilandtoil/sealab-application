@@ -1,6 +1,6 @@
 {
   "name": "@moilandtoil/sealab-application",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Application container for services, connections, and logger",
   "main": "index.js",
   "scripts": {

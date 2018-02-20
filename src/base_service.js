@@ -30,17 +30,24 @@ class BaseService {
   }
 
   service(serviceName) {
-    if (this.application === null) {
-      throw new Error("Application container must be attached to service");
-    }
+    this.ensureApplication();
     return this.application.service(serviceName);
   }
 
+  model(modelName) {
+    this.ensureApplication();
+    return this.application.model(modelName);
+  }
+
   conn(connName) {
+    this.ensureApplication();
+    return this.application.conn(connName);
+  }
+
+  ensureApplication() {
     if (this.application === null) {
       throw new Error("Application container must be attached to service");
     }
-    return this.application.conn(connName);
   }
 }
 
