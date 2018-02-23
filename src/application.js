@@ -33,7 +33,7 @@ class Application {
 
   registerModels(models) {
     for(let model of models) {
-      this.registerModels(model)
+      this.registerModel(model)
     }
   }
 

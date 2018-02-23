@@ -45,7 +45,7 @@ class BaseService {
   }
 
   ensureApplication() {
-    if (this.application === null) {
+    if (!this.application) {
       throw new Error("Application container must be attached to service");
     }
   }
