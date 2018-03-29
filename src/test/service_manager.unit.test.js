@@ -4,6 +4,7 @@ const ServiceManager = require("../service_manager.js");
 const BaseService = require("../base_service.js");
 
 class ValidService extends BaseService {}
+class ValidComplexService extends BaseService {}
 
 describe("Check that ServiceManager", () => {
 
@@ -19,9 +20,14 @@ describe("Check that ServiceManager", () => {
       serviceManager = new ServiceManager();
     });
 
-    test("that exists", () => {
+    test("that exists simple", () => {
       let service = serviceManager.register(ValidService, {});
       expect(serviceManager.getService("valid_service")).toEqual(service);
+    });
+
+    test("that exists", () => {
+      let service = serviceManager.register(ValidComplexService, {});
+      expect(serviceManager.getService("valid_complex_service")).toEqual(service);
     });
 
     test("that doesn't exist", () => {
