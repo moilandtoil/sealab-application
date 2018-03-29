@@ -14,7 +14,7 @@ class ConnectionManager {
 
   getConnection(connName) {
     if (!this.connections.hasOwnProperty(connName)) {
-      throw new Error("Connection not configured");
+      throw new Error("Connection \"${connName}\" not configured");
     }
     return this.connections[connName];
   }

@@ -21,7 +21,7 @@ class ServiceManager {
     if (this.services.hasOwnProperty(serviceName)) {
       return this.services[serviceName];
     }
-    throw new Error("Service not configured");
+    throw new Error("Service \"${serviceName}\" not configured");
   }
 }
 

@@ -15,7 +15,7 @@ class ModelManager {
 
   getModel(modelName) {
     if (!this.models.hasOwnProperty(modelName)) {
-      throw new Error("Model not configured");
+      throw new Error("Model \"${modelName}\" not configured");
     }
     return this.models[modelName];
   }
