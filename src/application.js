@@ -27,8 +27,8 @@ class Application {
     return this.connectionManager.register(connName, connObj);
   }
 
-  registerModel(modelName, modelClass) {
-    return this.modelManager.register(modelName, modelClass);
+  registerModel(model) {
+    return this.modelManager.register(model);
   }
 
   registerModels(models) {
