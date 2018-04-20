@@ -46,10 +46,12 @@ describe("When instantiating service", () => {
       testOp = new ValidService({
         service: () => { return true },
         conn: () => { return true },
-        logger: {
-          error: logFunc,
-          info: logFunc,
-          debug: logFunc,
+        logger: () => {
+          return {
+            error: logFunc,
+              info: logFunc,
+            debug: logFunc,
+          };
         }
       });
     });
